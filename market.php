@@ -72,10 +72,11 @@ $id_guest=$_SESSION['id_guest'];
                <tbody>
                  <?php
                  $hoy = date("Y-m-d", strtotime("-1 day"));
+                 echo $hoy;
 
 
                  if (isset($id_guest)) {
-                   $sql = "SELECT guest.id_guest, guest_extras.id_guestextras, guest_extras.id_guest, guest_extras.id_extra,guest_extras.pago,extra.id_extra,extra.nombre,extra.costo from guest inner  JOIN guest_extras on guest.id_guest=guest_extras.id_guest inner JOIN extra on guest_extras.id_extra= extra.id_extra and guest.id_guest=$id_guest and guest_extras.date='$hoy'";
+                   $sql = "SELECT * FROM guest JOIN guest_extras on guest.id_guest=guest_extras.id_guest JOIN extra ON guest_extras.id_extra=extra.id_extra AND guest.id_guest=$id_guest AND guest_extras.date='$hoy' and guest_extras.pago!=1";
                    $result = mysqli_query($mysqli, $sql);
 
                    if (mysqli_num_rows($result) > 0) {

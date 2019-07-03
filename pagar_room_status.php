@@ -50,12 +50,22 @@ if ($pago<$suma) {
 if ($mysqli->query($sql) === TRUE) {
 
 
-  $sql = "UPDATE rooms SET estado='Disponible' WHERE room_id=$id_room";
+  $sql = "UPDATE rooms SET estado='Limpiando' WHERE room_id=$id_room";
 
   if ($mysqli->query($sql) === TRUE) {
+    ////// BORRAR DATO DE TABLA EVENTS////////
+    $sql = "DELETE FROM events WHERE id_guest=$id_guest";
 
-      session_destroy();
-    header('Location: index.php');
+    if ($mysqli->query($sql) === TRUE) {
+
+        session_destroy();
+      header('Location: index.php');
+    } else {
+        echo "Error updating record: " . $mysqli->error;
+    }
+
+    //  session_destroy();
+    //header('Location: index.php');
   } else {
       echo "Error updating record: " . $mysqli->error;
   }

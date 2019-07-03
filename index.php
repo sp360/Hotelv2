@@ -30,7 +30,7 @@
           <h6 class="card-text">'.$row['precio']. ' Pesos</h6>
           <h5 class="card-text"><p class="';if($row['estado']=="Disponible"){echo "text-success";}elseif($row['estado']=="Ocupado"){echo "text-danger";}elseif($row['estado']=="Limpiando"){echo "text-primary";}elseif($row['estado']=="Mantenimiento"){echo "text-warning";}
           echo '"</p>'.$row['estado'].'</h5>
-          <form action="';if($row['estado']=="Disponible"){echo "sessionindex.php";}elseif ($row['estado']=="Ocupado") {echo "room_status_session.php";}else {echo "";} echo '" method="post">
+          <form action="';if($row['estado']=="Disponible"){echo "sessionindex.php";}elseif ($row['estado']=="Ocupado") {echo "room_status_session.php";}else {echo "room_management.php";} echo '" method="post">
           <input type="text" hidden id="room_id" name="room_id" value="'.$row['room_id'].'">
           <input type="text" hidden id="estado" name="estado" value="'.$row['estado'].'">
           <input type="text" hidden id="categoria" name="categoria" value="'.$row['categoria'].'">

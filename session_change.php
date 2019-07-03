@@ -37,7 +37,26 @@ if ($pago<$cargo) {
 
                   $_SESSION['cambio']=$cambio;
 
-                  header('Location: changue.php');
+                  /////SE AGREGO ESTA LINEA PARA INSERTAR DATOS EN LA TABLA EVENTS///////
+                  if ($mysqli->query($sql) === TRUE) {
+                    $sql = "INSERT INTO `events` ( `title`, `start`, `end`,`id_guest` ) VALUES ('Habitacion $room_id' , '$hoy', '$checkout', $id_guest)";
+                    if (mysqli_query($mysqli, $sql)) {
+                    //  header('Location: changue.php');
+                    /////////////////SE AGREGO ESTA LINEA PARA ACTUALIZAR EL ESTADO DEL PAGO DE LOS ARTICULOS/////////
+                    $sql = "UPDATE guest_extras SET pago=1 WHERE id_guest=$id_guest and pago=0 ";
+
+                    if (mysqli_query($mysqli, $sql)) {
+                      header('Location: changue.php');
+
+                    }else {
+                      echo "Error updating record: " . mysqli_error($mysqli);
+                    }
+                      }else {
+                          echo "Error updating record: " . mysqli_error($mysqli);
+                      }
+                  }
+                  //////// FIN DE ESTA LINEA/////////////////////////////////////////////
+                  // header('Location: changue.php');
 
                 } else {
                     echo "Error updating record: " . mysqli_error($mysqli);

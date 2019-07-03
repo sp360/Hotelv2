@@ -8,7 +8,7 @@ $sql = "UPDATE rooms SET estado='$modificador' WHERE room_id='$room_id'";
 
 if (mysqli_query($mysqli, $sql)) {
    echo ' <script type="text/javascript">
-  window.location="https://www.hotelonixsuites.com/Hotelv2/room_management.php";
+  window.location="room_management.php";
 </script>
 ';
 } else {
